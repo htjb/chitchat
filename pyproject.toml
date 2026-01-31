@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=77.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "chitchat"
+version = "0.1.0"
+description = "Chat with LLMs."
+authors = [{name="Harry Bevins"}]
+
+[project.scripts]
+chitchat = "chitchat.main:main"
+
+[tool.ruff]
+line-length = 79
+
+[tool.ruff.lint]
+select =["E", "F", "W",  # basics
+            "I",            # isort
+            "D",            # docstrings
+            "UP",           # pyupgrade (includes type modernization)
+            "ANN",          # type annotations
+            ]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
