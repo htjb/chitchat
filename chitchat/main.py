@@ -5,12 +5,15 @@ import ollama
 import os
 import yaml
 
+home = os.environ['HOME']
+
 def main():
     """Main entry point for chitchat."""
     print("Welcome to ChitChat! Type your message and press Enter to chat.")
-
-    if os.path.exists(".config/chitchat/chitchat.yaml"):
-        config = yaml.safe_load(open(".config/chitchat/chitchat.yaml"))
+    
+    config_path = home + "/.config/chitchat/chitchat.yaml"
+    if os.path.exists(config_path):
+        config = yaml.safe_load(open(config_path))
 
     available_models = ollama.list()
     models = [av.model for av in available_models.models]
