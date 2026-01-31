@@ -1,13 +1,14 @@
 from ollama import chat
 
-def converse(message: str, history: list):
+def converse(message: str, history: list, model: str) -> list:
     message = message.strip()
 
     # Add user message to history
     history.append({'role': 'user', 'content': message})
 
+    
     stream = chat(
-            model='gemma3',
+            model=model,
             messages=history,
             stream=True)
 

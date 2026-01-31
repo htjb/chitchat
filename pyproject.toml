@@ -7,6 +7,10 @@ name = "chitchat"
 version = "0.1.0"
 description = "Chat with LLMs."
 authors = [{name="Harry Bevins"}]
+dependencies = [
+    "ollama",
+    "pyyaml",
+    ]
 
 [project.scripts]
 chitchat = "chitchat.main:main"
