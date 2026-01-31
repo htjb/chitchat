@@ -1,27 +1,38 @@
 from textual.app import App, ComposeResult
-from textual.widgets import Footer, Header, TextArea
+from textual.containers import Vertical
+from textual.events import Key
+from textual.widgets import Footer, Header, Input, Static
+
+
+class CustomInput(Input):
+    def on_key(self, event: Key) -> None:
+        # 1. Check for the specific key combo you want
+        if event.key == "shift+enter":  # Many terminals send ctrl+enter as ctrl+j
+             self.post_message(Input.Submitted(self, self.value))
+             event.stop()  # Prevent further handling
+             event.prevent_default()
+
+        elif event.key == "enter":
+             event.stop()
+             event.prevent_default()
 
 
 class ChitChat(App):
-    """A Textual app to chat to ollama models."""
-
     CSS_PATH = "static/styles.css"
 
-    BINDINGS = [("d", "toggle_dark", "Toggle dark mode")]
-
     def compose(self) -> ComposeResult:
-        """Create child widgets for the app."""
         yield Header()
+        yield Vertical(id="messages")  # for messages
+        yield CustomInput(placeholder="Type your message here...", id="chat_input")
         yield Footer()
-        yield TextArea(id='inputtext', placeholder="Type your message here...")
 
-    def action_toggle_dark(self) -> None:
-        """An action to toggle dark mode."""
-        self.theme = (
-            "textual-dark" if self.theme ==
-            "textual-light" else "textual-light"
-        )
+    def on_input_submitted(self, event: Input.Submitted) -> None:
+        """This is called when the user presses Enter in an Input widget."""
+        content = event.value
+        event.input.value = ""  # clear the input
 
+        messages = self.query_one("#messages", Vertical)
+        messages.mount(Static(content))  # add message to the list
 
 if __name__ == "__main__":
     app = ChitChat()

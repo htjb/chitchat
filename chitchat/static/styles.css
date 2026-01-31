@@ -6,3 +6,9 @@
     border: solid #ccc;
     dock: bottom;
 }
+
+#messages {
+    overflow-y: auto;
+    background: $panel;
+    color: $text;
+}
