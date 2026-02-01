@@ -1,0 +1,38 @@
+#bottom {
+    dock: bottom;
+    height: auto;
+}
+
+#chat_input {
+    width: 100%;
+    height: auto;
+    min-height: 2;
+    max-height: 10;
+}
+
+#messages {
+    height: 1fr;
+    overflow-y: auto;
+}
+
+.msg-user {
+    background: $primary;
+    color: $text;
+    padding: 0 1;
+    margin-bottom: 1;
+}
+
+.msg-system {
+    background: $secondary;
+    color: $text;
+    padding: 0 1;
+    margin-bottom: 1;
+    text-align: center;
+}
+
+.msg-llm {
+    background: $surface;
+    color: $text;
+    padding: 0 1;
+    margin-bottom: 1;
+}

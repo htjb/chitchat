@@ -4,12 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "chitchat"
-version = "0.1.0"
+version = "0.2.0"
 description = "Chat with LLMs."
 authors = [{name="Harry Bevins"}]
 dependencies = [
     "ollama",
     "pyyaml",
+    "textual"
     ]
 
 [project.scripts]
