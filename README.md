@@ -29,4 +29,4 @@ ollama pull gemma3
 
 Run the `chitchat` command in the terminal and type /exit to quit.
 
-[chitchat_screenshot.svg](https://github.com/htjb/chitchat/raw/tui/chitchat_screenshot.svg)
+![chitchat_screenshot.svg](https://github.com/htjb/chitchat/raw/tui/chitchat_screenshot.svg)
