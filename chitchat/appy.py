@@ -7,9 +7,6 @@ from textual.widgets import Footer, Header, Static, TextArea
 class ChatInput(TextArea):
     """A TextArea that sends a custom message on Shift+Enter."""
 
-    MIN_HEIGHT = 2
-    MAX_HEIGHT = 10
-
     class Submitted(Message):
         """Posted when the user presses Shift+Enter."""
 
@@ -25,16 +22,6 @@ class ChatInput(TextArea):
         """Post a Submitted message with the current text."""
         self.post_message(self.Submitted(self, self.text))
 
-    def _update_height(self) -> None:
-        """Grow/shrink to fit the current number of lines."""
-        lines = self.text.count("\n") + 1
-        # +1 for a blank line below the text so it doesn't feel cramped
-        new_height = max(self.MIN_HEIGHT, min(lines + 1, self.MAX_HEIGHT))
-        self.styles.height = new_height
-
-    def on_text_area_changed(self) -> None:
-        """Called whenever the text changes (typing or clearing)."""
-        self._update_height()
 
 
 class ChitChat(App):
@@ -43,11 +30,12 @@ class ChitChat(App):
     def compose(self) -> ComposeResult:
         yield Header()
         yield Vertical(id="messages")
-        yield ChatInput(
-            id="chat_input",
-            language="text",
-        )
-        yield Footer()
+        with Vertical(id="bottom"):
+            yield ChatInput(
+                id="chat_input",
+                language="text",
+            )
+            yield Footer()
 
     def on_chat_input_submitted(
         self, event: ChatInput.Submitted
